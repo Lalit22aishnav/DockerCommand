@@ -1,0 +1,33 @@
+/* Command For Build */
+docker build -t <buildName> .      /*here dot symble show the current directory where the docker file exist */
+
+/* Command To See Docker Images */
+docker image ls
+
+/* Command To See Docker Container */
+docker Container ls
+
+/* Command To Run Img/Container */
+docker run -d  <imageName> 
+
+/* Command To Remove Docker Image*/  
+docker rmi <ImageName>
+
+/* Command To Remove Docker Container
+   First stop the container if running then after execute the remove command
+  */    
+docker stop <ContainerName>
+docker remove <ContainerName>
+
+/*Command To check allocated ip to your contaier ... */
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <ContainerName>
+
+/*Command To create new network in docker */  
+docker network create --subnet=192.168.2.0/24 <NetWorkName>
+
+/*Command To Give Specific IP address to your container with Port binding ... */  
+docker run -d  --network <NetWorkName> --ip 192.168.2.212 -p 3000:3000 <imageName>
+
+/*if the container crashes or is stopped for any reason and want auto restart container then use below command */
+docker run -d --restart unless-stopped --network <NetWorkName> --ip 192.168.2.212 -p 3000:3000 <imageName>
+  
